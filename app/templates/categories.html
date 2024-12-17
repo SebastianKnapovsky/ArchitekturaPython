@@ -2,18 +2,19 @@
 
 {% block content %}
 <div class="dialog-container">
-    <h2 class="dialog-title">Twoje kategorie</h2>
+    <h2 class="dialog-title">Dodaj nową kategorię</h2>
     <form method="POST" class="dialog-form">
         <div class="form-group">
             <label for="category_name">Nazwa kategorii:</label>
-            <input type="text" id="category_name" name="category_name" placeholder="Wprowadź nazwę" required>
+            <input type="text" id="category_name" name="category_name" class="form-input" placeholder="Wprowadź nazwę kategorii" required>
         </div>
         <div class="dialog-buttons">
             <button type="submit" class="btn btn-primary">Dodaj kategorię</button>
-            <a href="{{ url_for('dashboard') }}" class="btn btn-success">Powrót</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Powrót</a>
         </div>
     </form>
 
+    <h3 class="table-title">Twoje kategorie</h3>
     <table class="summary-table">
         <tr>
             <th>Nazwa kategorii</th>

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style_auth.css') }}">
 </head>
 <body>
-    <!-- Navbar -->
     <nav>
         <div class="nav-left">
             <h2>OrganizerApp</h2>
@@ -19,8 +18,7 @@
             {% endif %}
         </div>
     </nav>
-
-    <!-- Dynamiczna zawartość -->
+    
     <div class="content">
         {% block content %}{% endblock %}
     </div>

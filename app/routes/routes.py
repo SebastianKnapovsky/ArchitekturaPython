@@ -3,7 +3,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from app import app, db
 from app.models.user import User
 
-# Strona główna - przekierowanie w zależności od stanu logowania
 @app.route('/')
 def home():
     if current_user.is_authenticated:
@@ -50,8 +49,6 @@ def register():
             return redirect(url_for('login'))
 
     return render_template('register.html', error=error, success=success)
-
-
 
 # Wylogowanie
 @app.route('/logout')

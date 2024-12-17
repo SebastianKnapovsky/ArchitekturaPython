@@ -2,7 +2,13 @@
 
 {% block content %}
 <div class="dialog-container">
-    <h2 class="dialog-title">Podsumowanie wydatków</h2>
+    <div class="table-buttons">
+        <a href="{{ url_for('add_expense') }}" class="btn btn-primary">Dodaj wydatek</a>
+        <a href="{{ url_for('add_category') }}" class="btn btn-secondary">Dodaj kategorię</a>
+    </div>
+    
+    <h2 class="summary-title">Podsumowanie wydatków</h2>
+
     <table class="summary-table">
         <tr>
             <th>Kategoria</th>
@@ -19,10 +25,5 @@
         </tr>
         {% endfor %}
     </table>
-
-    <div class="table-buttons">
-        <a href="{{ url_for('add_expense') }}" class="btn btn-primary">Dodaj wydatek</a>
-        <a href="{{ url_for('add_category') }}" class="btn btn-success">Dodaj kategorię</a>
-    </div>
 </div>
 {% endblock %}

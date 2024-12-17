@@ -6,11 +6,11 @@
     <form method="POST" class="dialog-form">
         <div class="form-group">
             <label for="amount">Kwota:</label>
-            <input type="number" id="amount" name="amount" placeholder="Wprowadź kwotę" required>
+            <input type="number" id="amount" name="amount" placeholder="Wprowadź kwotę" class="form-input" required>
         </div>
         <div class="form-group">
             <label for="category">Kategoria:</label>
-            <select id="category" name="category" required>
+            <select id="category" name="category" class="form-select" required>
                 <option value="" disabled selected>Wybierz kategorię</option>
                 {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.name }}</option>
@@ -19,11 +19,11 @@
         </div>
         <div class="form-group">
             <label for="description">Opis:</label>
-            <input type="text" id="description" name="description" placeholder="Wprowadź opis">
+            <input type="text" id="description" name="description" placeholder="Wprowadź opis" class="form-input">
         </div>
         <div class="dialog-buttons">
             <button type="submit" class="btn btn-primary">Zapisz</button>
-            <a href="{{ url_for('dashboard') }}" class="btn btn-success">Powrót</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Powrót</a>
         </div>
     </form>
 </div>

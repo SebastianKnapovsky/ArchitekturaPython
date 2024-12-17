@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Navbar dla niezalogowanego -->
     <nav>
         <div class="nav-left">
             <h2>OrganizerApp</h2>
         </div>
     </nav>
-
-    <!-- Główna zawartość -->
+    
     <div class="content">
         {% block content %}{% endblock %}
     </div>
