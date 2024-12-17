@@ -1,48 +1,65 @@
-from app import app
-from flask import render_template, request, redirect, url_for, flash, session
+from flask import render_template, redirect, url_for, request
+from flask_login import login_user, logout_user, login_required, current_user
+from app import app, db
+from app.models.user import User
 
-app.secret_key = 'super_secret_key'  # Klucz dla sesji
-
-# Strona główna
+# Strona główna - przekierowanie w zależności od stanu logowania
 @app.route('/')
 def home():
-    if 'username' in session:
+    if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     return redirect(url_for('login'))
 
-# Strona logowania
+# Logowanie
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        if username == "admin" and password == "password":
-            session['username'] = username  # Ustawienie sesji
-            flash("Zalogowano pomyślnie!", "success")
+        username = request.form['username']
+        password = request.form['password']
+
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+            login_user(user)
             return redirect(url_for('dashboard'))
         else:
-            flash("Nieprawidłowa nazwa użytkownika lub hasło", "danger")
-    return render_template('login.html')
+            error = "Nieprawidłowa nazwa użytkownika lub hasło."
 
-# Strona rejestracji
+    return render_template('login.html', error=error)
+
+# Rejestracja
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    error = None
+    success = None
     if request.method == 'POST':
-        username = request.form.get('username')
-        flash(f"Użytkownik {username} został pomyślnie zarejestrowany!", "success")
-        return redirect(url_for('login'))
-    return render_template('register.html')
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
 
-# Dashboard (dla zalogowanego użytkownika)
+        if User.query.filter_by(username=username).first():
+            error = "Nazwa użytkownika jest już zajęta."
+        elif User.query.filter_by(email=email).first():
+            error = "Adres e-mail jest już zarejestrowany."
+        else:
+            new_user = User(username=username, email=email)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.commit()
+            success = "Rejestracja zakończona sukcesem. Możesz się teraz zalogować."
+            return redirect(url_for('login'))
+
+    return render_template('register.html', error=error, success=success)
+
+# Dashboard
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    return render_template('dashboard.html', username=session['username'])
+    return render_template('dashboard.html', username=current_user.username)
 
 # Wylogowanie
 @app.route('/logout')
+@login_required
 def logout():
-    session.pop('username', None)
-    flash("Wylogowano pomyślnie.", "info")
+    logout_user()
     return redirect(url_for('login'))

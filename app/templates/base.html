@@ -13,13 +13,14 @@
             <h2>OrganizerApp</h2>
         </div>
         <div class="nav-right">
-            {% if session['username'] %}
-                <span>Witaj, {{ session['username'] }}</span>
+            {% if current_user.is_authenticated %}
+                <span>Witaj, {{ current_user.username }}!</span>
                 <a href="{{ url_for('logout') }}">Wyloguj się</a>
             {% endif %}
         </div>
     </nav>
 
+    <!-- Główna zawartość -->
     <div class="content">
         {% block content %}{% endblock %}
     </div>

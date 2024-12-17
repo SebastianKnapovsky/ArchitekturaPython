@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Witaj, {{ username }}!</h1>
-<p>To jest Twój panel użytkownika.</p>
+<div class="form-container">
+    <h1>Witaj, {{ current_user.username }}!</h1>
+    <p>To jest Twój panel użytkownika. Możesz się wylogować, używając opcji w nawigacji.</p>
+</div>
 {% endblock %}

@@ -1,0 +1,40 @@
+# Ignorowanie katalogów kompilacji Pythona
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorowanie wirtualnych środowisk Python
+venv/
+env/
+.venv/
+.venv/
+
+# Ignorowanie logów i plików tymczasowych
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Ignorowanie plików migracji (jeśli chcesz odtworzyć je od zera)
+migrations/
+
+# Ignorowanie baz danych lokalnych
+db.sqlite3
+*.db
+
+# Ignorowanie plików konfiguracyjnych z danymi wrażliwymi
+.env
+.env.*   # W przypadku wielu plików środowiskowych, np. .env.development
+
+# Ignorowanie plików IDE i edytorów
+.vscode/
+.idea/
+*.iml
+
+# Ignorowanie plików generowanych przez systemy operacyjne
+.DS_Store
+Thumbs.db
+
+# Ignorowanie plików statycznych zbudowanych automatycznie
+staticfiles/
