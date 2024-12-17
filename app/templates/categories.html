@@ -1,0 +1,28 @@
+{% extends 'base_auth.html' %}
+
+{% block content %}
+<div class="dialog-container">
+    <h2 class="dialog-title">Twoje kategorie</h2>
+    <form method="POST" class="dialog-form">
+        <div class="form-group">
+            <label for="category_name">Nazwa kategorii:</label>
+            <input type="text" id="category_name" name="category_name" placeholder="Wprowadź nazwę" required>
+        </div>
+        <div class="dialog-buttons">
+            <button type="submit" class="btn btn-primary">Dodaj kategorię</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-success">Powrót</a>
+        </div>
+    </form>
+
+    <table class="summary-table">
+        <tr>
+            <th>Nazwa kategorii</th>
+        </tr>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

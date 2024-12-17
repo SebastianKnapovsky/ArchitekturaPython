@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrganizerApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_auth.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-left">
+            <h2>OrganizerApp</h2>
+        </div>
+        <div class="nav-right">
+            {% if current_user.is_authenticated %}
+                <span>Witaj, {{ current_user.username }}!</span>
+                <a href="{{ url_for('logout') }}">Wyloguj się</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Dynamiczna zawartość -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

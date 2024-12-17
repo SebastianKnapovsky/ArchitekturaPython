@@ -1,7 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'base_auth.html' %}
+
 {% block content %}
-<div class="form-container">
-    <h1>Witaj, {{ current_user.username }}!</h1>
-    <p>To jest Twój panel użytkownika. Możesz się wylogować, używając opcji w nawigacji.</p>
+<div class="dialog-container">
+    <h2 class="dialog-title">Podsumowanie wydatków</h2>
+    <table class="summary-table">
+        <tr>
+            <th>Kategoria</th>
+            <th>Miesiąc</th>
+            <th>Rok</th>
+            <th>Suma wydatków</th>
+        </tr>
+        {% for summary in summaries %}
+        <tr>
+            <td>{{ summary.category }}</td>
+            <td>{{ summary.month }}</td>
+            <td>{{ summary.year }}</td>
+            <td>{{ summary.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="table-buttons">
+        <a href="{{ url_for('add_expense') }}" class="btn btn-primary">Dodaj wydatek</a>
+        <a href="{{ url_for('add_category') }}" class="btn btn-success">Dodaj kategorię</a>
+    </div>
 </div>
 {% endblock %}

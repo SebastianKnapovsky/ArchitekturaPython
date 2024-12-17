@@ -51,11 +51,7 @@ def register():
 
     return render_template('register.html', error=error, success=success)
 
-# Dashboard
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    return render_template('dashboard.html', username=current_user.username)
+
 
 # Wylogowanie
 @app.route('/logout')
